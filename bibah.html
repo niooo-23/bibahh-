@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Untuk Anisa Labibah Basyirah</title>
+
+<style>
+
+body{
+margin:0;
+background:linear-gradient(135deg,#ffd6ec,#ffc0cb);
+font-family:"Comic Sans MS", cursive;
+text-align:center;
+overflow-x:hidden;
+
+display:flex;
+flex-direction:column;
+align-items:center;
+}
+
+/* HALAMAN AWAL */
+
+#start{
+position:fixed;
+width:100%;
+height:100%;
+background:linear-gradient(135deg,#ff9ecb,#ffc0cb);
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+z-index:10;
+}
+
+.startBtn{
+padding:20px 45px;
+font-size:22px;
+border:none;
+border-radius:40px;
+cursor:pointer;
+background:white;
+box-shadow:0 10px 25px rgba(0,0,0,0.3);
+transition:.3s;
+}
+
+.startBtn:hover{
+transform:scale(1.1);
+}
+
+/* NAMA */
+
+.title{
+font-size:45px;
+color:#ff2e7a;
+margin-top:30px;
+animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+0%{transform:scale(1)}
+50%{transform:scale(1.05)}
+100%{transform:scale(1)}
+}
+
+/* SLIDER FOTO */
+
+.slider{
+width:260px;
+height:260px;
+margin-top:40px;
+position:relative;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.slider img{
+position:absolute;
+width:100%;
+height:100%;
+object-fit:cover;
+border-radius:25px;
+opacity:0;
+transition:1s;
+
+box-shadow:
+0 10px 25px rgba(0,0,0,0.3),
+0 0 25px #ff6fa5,
+0 0 50px #ffb3d1;
+
+left:0;
+top:0;
+}
+
+.slider img.active{
+opacity:1;
+}
+
+/* BUTTON */
+
+.playBtn{
+background:#ff4d88;
+border:none;
+padding:15px 35px;
+font-size:18px;
+border-radius:30px;
+color:white;
+cursor:pointer;
+box-shadow:0 8px 15px rgba(0,0,0,0.2);
+margin-top:20px;
+transition:.3s;
+}
+
+.playBtn:hover{
+transform:scale(1.05);
+}
+
+/* PESAN */
+
+.message{
+font-size:22px;
+color:#ff2e7a;
+margin-top:25px;
+padding:0 20px;
+min-height:30px;
+}
+
+/* LOVE JATUH */
+
+.heart{
+position:fixed;
+top:-10px;
+font-size:22px;
+animation:fall 6s linear infinite;
+opacity:0.8;
+}
+
+@keyframes fall{
+0%{transform:translateY(0)}
+100%{transform:translateY(100vh)}
+}
+
+/* SPARKLE */
+
+.sparkle{
+position:fixed;
+width:4px;
+height:4px;
+background:white;
+border-radius:50%;
+animation:twinkle 2s infinite;
+}
+
+@keyframes twinkle{
+0%{opacity:.2;transform:scale(.5)}
+50%{opacity:1;transform:scale(1.8)}
+100%{opacity:.2;transform:scale(.5)}
+}
+
+/* SAKURA */
+
+.sakura{
+position:fixed;
+top:-10px;
+font-size:18px;
+animation:sakura 8s linear infinite;
+opacity:0.8;
+}
+
+@keyframes sakura{
+0%{transform:translateY(0) rotate(0)}
+100%{transform:translateY(100vh) rotate(360deg)}
+}
+
+/* FIREWORK */
+
+.firework{
+position:fixed;
+width:8px;
+height:8px;
+background:#ff69b4;
+border-radius:50%;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="start">
+
+<h1>💌 Ada sesuatu untuk kamu</h1>
+<button class="startBtn" onclick="startLove()">Klik Ini Anisa 💗</button>
+
+</div>
+
+<h1 class="title">Anisa Labibah Basyirah</h1>
+
+<p>Website kecil ini dibuat khusus untuk kamu</p>
+
+<div class="slider">
+
+<img src="foto1.jpg" class="active">
+<img src="foto2.jpg">
+<img src="foto3.jpg">
+<img src="foto4.jpg">
+
+</div>
+
+<button class="playBtn" id="musicBtn" onclick="toggleMusic()">💖 Play Lagu</button>
+
+<audio id="lagu">
+<source src="lagubibah.mp3" type="audio/mpeg">
+</audio>
+
+<div class="message" id="text"></div>
+
+<script>
+
+/* START */
+
+function startLove(){
+
+document.getElementById("start").style.display="none";
+
+confetti();
+firework();
+loveText();
+
+}
+
+/* SLIDE FOTO */
+
+let slides=document.querySelectorAll(".slider img");
+let index=0;
+
+setInterval(()=>{
+
+slides[index].classList.remove("active");
+index=(index+1)%slides.length;
+slides[index].classList.add("active");
+
+},3000);
+
+/* MUSIC */
+
+let music=document.getElementById("lagu");
+let playing=false;
+
+function toggleMusic(){
+
+let btn=document.getElementById("musicBtn");
+
+if(!playing){
+music.play();
+btn.innerText="⏸ Pause Lagu";
+playing=true;
+}else{
+music.pause();
+btn.innerText="💖 Play Lagu";
+playing=false;
+}
+
+}
+
+/* LOVE JATUH */
+
+setInterval(()=>{
+
+let h=document.createElement("div");
+
+h.className="heart";
+h.innerHTML="❤️";
+
+h.style.left=Math.random()*100+"vw";
+
+document.body.appendChild(h);
+
+setTimeout(()=>h.remove(),6000);
+
+},300);
+
+/* SPARKLE */
+
+setInterval(()=>{
+
+let s=document.createElement("div");
+
+s.className="sparkle";
+
+s.style.left=Math.random()*100+"vw";
+s.style.top=Math.random()*100+"vh";
+
+document.body.appendChild(s);
+
+setTimeout(()=>s.remove(),2000);
+
+},150);
+
+/* SAKURA */
+
+setInterval(()=>{
+
+let f=document.createElement("div");
+
+f.className="sakura";
+f.innerHTML="🌸";
+
+f.style.left=Math.random()*100+"vw";
+
+document.body.appendChild(f);
+
+setTimeout(()=>f.remove(),7000);
+
+},500);
+
+/* CONFETTI */
+
+function confetti(){
+
+for(let i=0;i<100;i++){
+
+let c=document.createElement("div");
+
+c.className="sparkle";
+
+c.style.left=Math.random()*100+"vw";
+c.style.top=Math.random()*100+"vh";
+
+document.body.appendChild(c);
+
+setTimeout(()=>c.remove(),2000);
+
+}
+
+}
+
+/* FIREWORK */
+
+function firework(){
+
+for(let i=0;i<120;i++){
+
+let f=document.createElement("div");
+
+f.className="firework";
+
+f.style.left="50vw";
+f.style.top="50vh";
+
+let x=(Math.random()-0.5)*500;
+let y=(Math.random()-0.5)*500;
+
+f.animate([
+{transform:"translate(0,0)",opacity:1},
+{transform:`translate(${x}px,${y}px)`,opacity:0}
+],{duration:1300});
+
+document.body.appendChild(f);
+
+setTimeout(()=>f.remove(),1300);
+
+}
+
+}
+
+/* LOVE TEXT */
+
+function loveText(){
+
+let text="ANISA";
+let container=document.createElement("div");
+
+container.style.position="fixed";
+container.style.top="50%";
+container.style.left="50%";
+container.style.transform="translate(-50%,-50%)";
+container.style.fontSize="70px";
+container.style.color="#ff2e7a";
+container.style.opacity="0.3";
+
+container.innerText=text;
+
+document.body.appendChild(container);
+
+setTimeout(()=>container.remove(),3000);
+
+}
+
+/* PESAN EFEK KETIK */
+
+let messages=[
+"kamu itu spesial 💗",
+"hadirmu bikin hari lebih indah",
+"semoga kamu selalu bahagia",
+"terima kasih sudah ada ✨"
+];
+
+let m=0;
+
+function typeText(){
+
+let text=messages[m];
+let i=0;
+
+let interval=setInterval(()=>{
+
+document.getElementById("text").innerText=text.substring(0,i);
+
+i++;
+
+if(i>text.length){
+
+clearInterval(interval);
+
+setTimeout(()=>{
+m=(m+1)%messages.length;
+typeText();
+},2000);
+
+}
+
+},70);
+
+}
+
+typeText();
+
+</script>
+
+</body>
+</html>
